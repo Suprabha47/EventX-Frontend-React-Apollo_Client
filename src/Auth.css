@@ -1,0 +1,35 @@
+.auth-container {
+  min-height: 100vh;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-box {
+  background: #fff;
+  width: 90%;
+  max-width: 1000px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.left-pane {
+  background: url("https://e1.pxfuel.com/desktop-wallpaper/721/613/desktop-wallpaper-abstract-login-page.jpg")
+    no-repeat center center;
+  background-size: cover;
+  padding: 40px 20px;
+  color: white;
+  text-align: center;
+}
+
+.right-pane {
+  background: white;
+  padding: 30px;
+}
+
+.social-icons i {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
