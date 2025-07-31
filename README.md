@@ -1,4 +1,4 @@
-# 🎭 EventX Frontend
+# EventX Frontend
 
 This is the frontend of **EventX**, a full-featured event management platform. Built using **React**, **Apollo Client**, and **React Bootstrap**, it connects to a GraphQL backend for event creation, registration, and management.
 
