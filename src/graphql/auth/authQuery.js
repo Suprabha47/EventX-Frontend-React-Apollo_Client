@@ -42,6 +42,12 @@ export const GET_BOOKINGS_BY_USER_ID = gql`
       bookings {
         eventId {
           id
+          name
+          description
+          date
+          time
+          location
+          status
         }
       }
     }

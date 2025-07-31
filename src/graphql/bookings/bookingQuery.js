@@ -16,6 +16,9 @@ export const GET_BOOKINGS = gql`
         name
         date
         time
+        status
+        availableSeats
+        totalSeats
       }
     }
   }

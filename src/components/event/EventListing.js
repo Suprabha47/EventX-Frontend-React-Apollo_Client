@@ -12,8 +12,10 @@ import {
 } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import { useQuery, useMutation } from "@apollo/client";
+import { useSelector } from "react-redux";
 import { GET_EVENTS } from "../../graphql/event/eventQuery";
 import { CREATE_BOOKING } from "../../graphql/bookings/bookingMutation";
+import { DELETE_EVENT } from "../../graphql/event/eventMutation";
 import getUserIdFromToken from "../../utils/getUserIdFromToken";
 
 import { toast } from "react-toastify";
@@ -22,6 +24,22 @@ import "react-toastify/dist/ReactToastify.css";
 const EventListing = () => {
   const { data, loading, error } = useQuery(GET_EVENTS);
   const [createBooking] = useMutation(CREATE_BOOKING);
+
+  const [deleteEvent, { loading: deleting }] = useMutation(DELETE_EVENT, {
+    refetchQueries: ["GetEvents"], // ✅ Refetch the event list
+    onCompleted: (data) => {
+      if (data?.deleteEvent?.success) {
+        toast.success("Event deleted successfully!");
+      } else {
+        toast.error(data?.deleteEvent?.message || "Delete failed.");
+      }
+    },
+    onError: (error) => {
+      toast.error("Error deleting event: " + error.message);
+    },
+  });
+
+  const isAdmin = useSelector((state) => state.user.isAdmin);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("date");
@@ -87,10 +105,20 @@ const EventListing = () => {
     }
   };
 
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this event?")) {
+      deleteEvent({ variables: { id } });
+    }
+  };
+
   if (loading)
     return (
-      <div className="text-center mt-5">
-        <Spinner animation="border" variant="primary" />
+      <div className="text-center mt-5 mb-5 pb-5">
+        <Spinner
+          animation="border"
+          variant="primary"
+          className="mt-5 mb-5 pb-5"
+        />
       </div>
     );
 
@@ -104,7 +132,7 @@ const EventListing = () => {
   return (
     <Container className="mt-5">
       <div className="text-center mb-4">
-        <h6 className="text-muted">GROWTHUX</h6>
+        <h6 className="text-muted">eventX</h6>
         <h2>Upcoming Events</h2>
       </div>
 
@@ -194,13 +222,30 @@ const EventListing = () => {
                   <div className="text-muted">{event.time}</div>
                 </td>
                 <td className="text-center">
-                  <Button
-                    variant="outline-dark"
-                    size="sm"
-                    onClick={() => handleRegister(event.id)}
-                  >
-                    REGISTER
-                  </Button>
+                  {isAdmin ? (
+                    <>
+                      <Button
+                        variant="outline-danger"
+                        size="sm"
+                        className="me-2"
+                        onClick={() => handleDelete(event.id)}
+                        disabled={deleting}
+                      >
+                        {deleting ? "Deleting..." : "DELETE"}
+                      </Button>
+                      <Button variant="outline-primary" size="sm">
+                        UPDATE
+                      </Button>
+                    </>
+                  ) : (
+                    <Button
+                      variant="outline-dark"
+                      size="sm"
+                      onClick={() => handleRegister(event.id)}
+                    >
+                      REGISTER
+                    </Button>
+                  )}
                 </td>
               </tr>
             ))

@@ -13,6 +13,7 @@ import BookedEvents from "./components/booking/BookedEvent";
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import CreateEventForm from "./components/booking/CreateEventForm";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -26,6 +27,7 @@ root.render(
               <Route index element={<Dashboard />} />
               <Route path="events" element={<EventListing />} />
               <Route path="bookings" element={<BookedEvents />} />
+              <Route path="create-event" element={<CreateEventForm />} />
             </Route>
           </Routes>
         </BrowserRouter>

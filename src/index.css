@@ -11,3 +11,63 @@ body {
   transform: translateY(-5px);
   transition: 0.3s ease;
 }
+.card-img-wrapper {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.card-img-wrapper img {
+  transition: transform 0.3s ease;
+}
+
+.card-img-wrapper:hover img {
+  transform: scale(1.05);
+}
+.card-img-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.15); /* subtle dark tint */
+  z-index: 1;
+}
+.card-overlay {
+  position: absolute;
+  z-index: 2;
+}
+
+.card-overlay {
+  background: rgba(0, 0, 0, 0.4); /* semi-transparent dark overlay */
+  backdrop-filter: blur(10px); /* blur the background behind */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  color: white;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+.custom-card {
+  height: 300px;
+  background: #000;
+  border-radius: 1.25rem;
+  position: relative;
+}
+
+.card-img-wrapper {
+  height: 60%;
+}
+
+.card-overlay {
+  background: rgba(0, 0, 0, 0.4); /* translucent */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: white;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom-left-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+}

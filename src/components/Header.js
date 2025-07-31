@@ -41,12 +41,17 @@ const Header = () => {
             <Nav.Link as={Link} to="/bookings" className="nav-link">
               Bookings
             </Nav.Link>
-            <Nav.Link as={Link} to="/" className="nav-link">
-              Contact
-            </Nav.Link>
+            {user?.isAdmin ? (
+              <Nav.Link as={Link} to="/create-event" className="nav-link">
+                Create Event
+              </Nav.Link>
+            ) : (
+              <Nav.Link as={Link} to="/" className="nav-link">
+                Contact
+              </Nav.Link>
+            )}
           </Nav>
 
-          {/* ✅ Conditional render based on user status */}
           <div className="d-flex gap-2 align-items-center">
             {user?.status ? (
               <div>
