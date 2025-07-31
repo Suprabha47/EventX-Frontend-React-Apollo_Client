@@ -20,10 +20,12 @@ import getUserIdFromToken from "../../utils/getUserIdFromToken";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const EventListing = () => {
   const { data, loading, error } = useQuery(GET_EVENTS);
   const [createBooking] = useMutation(CREATE_BOOKING);
+  const navigate = useNavigate();
 
   const [deleteEvent, { loading: deleting }] = useMutation(DELETE_EVENT, {
     refetchQueries: ["GetEvents"], // ✅ Refetch the event list
@@ -233,7 +235,11 @@ const EventListing = () => {
                       >
                         {deleting ? "Deleting..." : "DELETE"}
                       </Button>
-                      <Button variant="outline-primary" size="sm">
+                      <Button
+                        variant="outline-primary"
+                        size="sm"
+                        onClick={() => navigate(`/edit-event/${event.id}`)}
+                      >
                         UPDATE
                       </Button>
                     </>

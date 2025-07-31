@@ -12,7 +12,6 @@ export const CREATE_EVENT = gql`
       category
       availableSeats
       totalSeats
-      status
       createdAt
       createdBy {
         id
@@ -33,12 +32,6 @@ export const UPDATE_EVENT = gql`
       category
       availableSeats
       totalSeats
-      status
-      createdAt
-      createdBy {
-        id
-        name
-      }
     }
   }
 `;

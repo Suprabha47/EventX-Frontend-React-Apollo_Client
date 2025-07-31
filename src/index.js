@@ -14,6 +14,7 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import CreateEventForm from "./components/booking/CreateEventForm";
+import EditEventForm from "./components/event/EditEventForm";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -28,6 +29,7 @@ root.render(
               <Route path="events" element={<EventListing />} />
               <Route path="bookings" element={<BookedEvents />} />
               <Route path="create-event" element={<CreateEventForm />} />
+              <Route path="edit-event/:id" element={<EditEventForm />} />
             </Route>
           </Routes>
         </BrowserRouter>
